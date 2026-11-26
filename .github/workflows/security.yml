@@ -58,6 +58,7 @@ jobs:
         continue-on-error: true
         run: |
           echo "=== RUNNING OWASP ZAP BASELINE SCAN ==="
+          chmod 777 ${{ github.workspace }}
           docker run --rm --network host -v ${{ github.workspace }}:/zap/wrk:rw ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://localhost:3000 -r zap.html -I
 
       - name: Upload ZAP Baseline HTML Report
